@@ -6,7 +6,15 @@ export type Coefficients = {
 };
 
 export type InputStatus = {
+    id: string;
     title: string;
+}
+
+export type AnalysisStatus = {
+    id: string;
+    title: string;
+    value: string;
+    colour: string;
 }
 
 export type Coordinate = {
