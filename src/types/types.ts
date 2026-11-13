@@ -5,6 +5,10 @@ export type Coefficients = {
   d: number;
 };
 
+export type InputStatus = {
+    title: string;
+}
+
 export type Coordinate = {
   x: number | string;
   y: number | string;
