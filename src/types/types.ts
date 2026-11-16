@@ -5,17 +5,23 @@ export type Coefficients = {
   d: number;
 };
 
+export type RootCoordinate = {
+  rootOne: Coordinate;
+  rootTwo: Coordinate;
+  rootThr: Coordinate;
+};
+
 export type InputStatus = {
-    id: string;
-    title: string;
-}
+  id: string;
+  title: string;
+};
 
 export type AnalysisStatus = {
-    id: string;
-    title: string;
-    value: string;
-    colour: string;
-}
+  id: string;
+  title: string;
+  value: string;
+  colour: string;
+};
 
 export type Coordinate = {
   x: number | string;

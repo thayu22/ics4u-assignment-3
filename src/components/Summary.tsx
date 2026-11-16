@@ -1,4 +1,4 @@
-import { SummaryLabel } from "./SummaryLabel"
+import { SummaryLabel } from "./SummaryLabel";
 
 export const Summary = () => {
   return (
@@ -7,11 +7,11 @@ export const Summary = () => {
         <h2 className="font-bold font-mono text-slate-500 text-xs uppercase tracking-widest">SUMMARY</h2>
       </div>
       <div className="space-y-1 font-mono text-xs">
-        <SummaryLabel title = "f(x) expanded polynomial" value = "N/A"></SummaryLabel>
-        <SummaryLabel title = "f'(x) first derivative" value = "N/A"></SummaryLabel>
-        <SummaryLabel title = "f''(x) second derivative" value = "N/A"></SummaryLabel>
-        <SummaryLabel title = "roots" value = "N/A"></SummaryLabel>
-        <SummaryLabel title = "factored form" value = "No real factorization"></SummaryLabel>
+        <SummaryLabel colour="text-slate-200" id="equation" title="f(x) expanded polynomial" value="N/A"></SummaryLabel>
+        <SummaryLabel colour="text-cyan-400" id="first-derivative" title="f'(x) first derivative" value="N/A"></SummaryLabel>
+        <SummaryLabel colour="text-purple-400" id="second-derivative" title="f''(x) second derivative" value="N/A"></SummaryLabel>
+        <SummaryLabel colour="text-emerald-400" id="roots" title="roots" value="N/A"></SummaryLabel>
+        <SummaryLabel colour="text-white" id="factored" title="factored form" value="No real factorization"></SummaryLabel>
       </div>
     </section>
   );
