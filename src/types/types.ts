@@ -11,18 +11,6 @@ export type RootCoordinate = {
   rootThr: Coordinate;
 };
 
-export type InputStatus = {
-  id: string;
-  title: string;
-};
-
-export type AnalysisStatus = {
-  id: string;
-  title: string;
-  value: string;
-  colour: string;
-};
-
 export type Coordinate = {
   x: number | string;
   y: number | string;
