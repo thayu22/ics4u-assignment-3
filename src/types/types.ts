@@ -32,4 +32,4 @@ export type Results = {
   factored: string;
 };
 
-export type History = Coefficients[];
+export type HistoryType = Coefficients[];

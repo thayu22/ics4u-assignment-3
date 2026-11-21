@@ -1,10 +1,12 @@
 import { type SyntheticEvent, useState } from "react";
 import { Analysis } from "./components/Analysis";
 import { DrawGraph } from "./components/DrawGraph";
+import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { History } from "./components/History";
 import { InputLabel } from "./components/InputLabel";
 import { Summary } from "./components/Summary";
-import type { Results } from "./types";
+import type { HistoryType, Results } from "./types";
 import { solveCubic } from "./utils/solveCubic";
 
 export const App = () => {
@@ -13,8 +15,9 @@ export const App = () => {
   const [c, setC] = useState(0);
   const [d, setD] = useState(0);
   const [results, setResults] = useState<Results | null>(null);
+  const [history, setHistory] = useState<HistoryType>([]);
 
-  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
+  const handleInput = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const p = (3 * a * c - b * b) / (3 * a * a);
     const q = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
@@ -33,7 +36,7 @@ export const App = () => {
           <div className="absolute top-0 left-0 h-full w-1 bg-cyan-500"></div>
           <form className="flex flex-wrap items-center justify-between gap-6" id="form">
             <div className="flex flex-1 flex-wrap justify-start gap-4 sm:gap-6">
-              <form className="flex flex-wrap items-center justify-between gap-6" id="form" onInput={handleSubmit}>
+              <form className="flex flex-wrap items-center justify-between gap-6" id="form" onInput={handleInput}>
                 <InputLabel id="a" label="a-value [x³]" setValue={setA} value={a}></InputLabel>
                 <InputLabel id="b" label="b-value [x²]" setValue={setB} value={b}></InputLabel>
                 <InputLabel id="c" label="c-value [x]" setValue={setC} value={c}></InputLabel>
@@ -60,9 +63,17 @@ export const App = () => {
               rootTwo: `x: ${results?.r2.x ?? "N/A"} | y: ${results?.r2.y ?? "N/A"}`,
             }}
           />
-          <Summary />
+          <Summary
+            equation={results?.equation ?? "N/A"}
+            factored={results?.factored ?? "N/A"}
+            firstDerivative={results?.firstDerivative ?? "N/A"}
+            roots={results?.roots ?? "N/A"}
+            secondDerivative={results?.secondDerivative ?? "N/A"}
+          />
+          <History></History>
           <DrawGraph />
         </div>
+        <Footer />
       </div>
     </div>
   );
