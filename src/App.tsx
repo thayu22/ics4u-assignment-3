@@ -3,10 +3,9 @@ import { Analysis } from "./components/Analysis";
 import { DrawGraph } from "./components/DrawGraph";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { History } from "./components/History";
 import { InputLabel } from "./components/InputLabel";
 import { Summary } from "./components/Summary";
-import type { HistoryType, Results } from "./types";
+import type { Coefficients, HistoryType, Results } from "./types";
 import { solveCubic } from "./utils/solveCubic";
 
 export const App = () => {
@@ -25,6 +24,17 @@ export const App = () => {
     const discriminant = (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
 
     setResults(solveCubic(p, q, a, b, c, d, discriminant));
+  };
+
+  const handleSubmit = (event: SyntheticEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const values: Coefficients = {
+      a: a,
+      b: b,
+      c: c,
+      d: d,
+    };
+    setHistory([...history, values]);
   };
   console.log(results);
 
@@ -45,6 +55,7 @@ export const App = () => {
             </div>
             <input
               className="w-full cursor-pointer self-end rounded-md bg-cyan-500 px-6 py-3 text-center font-bold font-mono text-[#07090e] text-xs tracking-wider shadow-cyan-500/10 shadow-lg transition duration-150 hover:bg-cyan-400 active:scale-95 sm:w-auto sm:self-auto"
+              onClick={handleSubmit}
               type="submit"
               value="SAVE"
             />
@@ -70,7 +81,26 @@ export const App = () => {
             roots={results?.roots ?? "N/A"}
             secondDerivative={results?.secondDerivative ?? "N/A"}
           />
-          <History></History>
+          <section className="flex max-h-140 flex-col space-y-6">
+            <div className="flex items-center gap-4">
+              <h2 className="font-bold font-mono text-slate-500 text-xs uppercase tracking-widest">HISTORY</h2>
+            </div>
+            <ul className="custom-scrollbar flex-1 space-y-2 overflow-y-auto pr-2 font-mono text-slate-400 text-xs" id="history">
+              {history.map((historyValues) => (
+                <li className="flex gap-2 font-mono" key={crypto.randomUUID()}>
+                  <div className="add-value grid flex-1 grid-cols-4 rounded-xl border border-slate-700 bg-slate-800/40 py-3 text-center text-sm text-white hover:bg-slate-800/70">
+                    <span>{historyValues.a}</span>
+                    <span>{historyValues.b}</span>
+                    <span>{historyValues.c}</span>
+                    <span>{historyValues.d}</span>
+                  </div>
+                  <div className="delete-button group w-20 rounded-lg border border-red-500/60 bg-red-500/10 py-3 text-center hover:bg-red-500/30">
+                    <button className="text-center font-medium text-red-400 text-xs group-hover:text-red-300">Delete</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
           <DrawGraph />
         </div>
         <Footer />
