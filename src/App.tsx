@@ -35,8 +35,11 @@ export const App = () => {
       d: d,
       id: crypto.randomUUID(),
     };
-    const checker = values.some();
-    setHistory([...history, values]);
+    if (history.some((items) => items.a === values.a && items.b === values.b && items.c === values.c && items.d === values.d)) {
+      return;
+    } else {
+      setHistory([...history, values]);
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -68,13 +71,13 @@ export const App = () => {
           <Analysis
             values={{
               discriminant: results?.discriminant ?? "N/A",
-              maximum: `x: ${results?.maximum.x ?? "N/A"} | y: ${results?.maximum.y ?? "N/A"}`,
-              minimum: `x: ${results?.minimum.x ?? "N/A"} | y: ${results?.minimum.y ?? "N/A"}`,
+              maximum: `${results?.maximum.x ?? "N/A"} | ${results?.maximum.y ?? "N/A"}`,
+              minimum: `${results?.minimum.x ?? "N/A"} | ${results?.minimum.y ?? "N/A"}`,
               pPara: results?.p ?? "N/A",
               qPara: results?.q ?? "N/A",
-              rootOne: `x: ${results?.r1.x ?? "N/A"} | y: ${results?.r1.y ?? "N/A"}`,
-              rootThree: `x: ${results?.r3.x ?? "N/A"} | y: ${results?.r3.y ?? "N/A"}`,
-              rootTwo: `x: ${results?.r2.x ?? "N/A"} | y: ${results?.r2.y ?? "N/A"}`,
+              rootOne: `${results?.r1.x ?? "N/A"} | ${results?.r1.y ?? "N/A"}`,
+              rootThree: `${results?.r3.x ?? "N/A"} | ${results?.r3.y ?? "N/A"}`,
+              rootTwo: `${results?.r2.x ?? "N/A"} | ${results?.r2.y ?? "N/A"}`,
             }}
           />
           <Summary
@@ -109,7 +112,17 @@ export const App = () => {
               ))}
             </ul>
           </section>
-          <DrawGraph />
+          <DrawGraph
+            coValues={{
+              a: a,
+              b: b,
+              c: c,
+              d: d,
+            }}
+            rootOne={results?.r1 ?? { x: 0, y: 0 }}
+            rootThree={results?.r3 ?? { x: 0, y: 0 }}
+            rootTwo={results?.r2 ?? { x: 0, y: 0 }}
+          />
         </div>
         <Footer />
       </div>

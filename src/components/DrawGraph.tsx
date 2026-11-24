@@ -1,4 +1,24 @@
-export const DrawGraph = () => {
+import type { Coefficients, Coordinate } from "@ics4u-assignment-02/types";
+import { drawGraph } from "@ics4u-assignment-02/utils/drawGraph";
+import { useEffect, useRef } from "react";
+
+type GraphType = {
+  coValues: Coefficients;
+  rootOne: Coordinate;
+  rootTwo: Coordinate;
+  rootThree: Coordinate;
+};
+
+export const DrawGraph = ({ coValues, rootOne, rootTwo, rootThree }: GraphType) => {
+  const graphRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (!graphRef.current) {
+      return;
+    }
+    drawGraph(coValues, { r1: rootOne, r2: rootThree, r3: rootTwo }, graphRef.current);
+  }, [coValues, rootOne, rootTwo, rootThree]);
+
   return (
     <section className="flex flex-col space-y-6">
       <div className="flex items-center gap-4">
@@ -9,6 +29,7 @@ export const DrawGraph = () => {
           className="w-full rounded-md border border-slate-900 bg-[#04060a] shadow-inner"
           height="400"
           id="graph"
+          ref={graphRef}
           width="400"
         ></canvas>
       </div>
