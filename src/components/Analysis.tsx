@@ -1,4 +1,3 @@
-import type { Coordinate } from "@ics4u-assignment-02/types";
 import { AnalysisLabel } from "./AnalysisLabel";
 
 type AnalysisValue = {
